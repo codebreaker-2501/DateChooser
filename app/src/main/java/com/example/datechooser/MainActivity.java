@@ -12,18 +12,25 @@ import com.google.android.material.textview.MaterialTextView;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity
-        implements android.app.DatePickerDialog.OnDateSetListener {
+/**
+ * @author dhanush n
+ * @version 1.0
+ */
+
+// Main activity implementing OnDateSetListener
+public class MainActivity extends AppCompatActivity implements
+        android.app.DatePickerDialog.OnDateSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        // assigning button id
         Button btn = findViewById(R.id.datePicker);
 
+        // Shows Date Picker Dialog on button click
         btn.setOnClickListener(view -> {
+            // creating new DialogFragment
             DialogFragment dialogFragment = new DatePickerDialog();
             dialogFragment.show(getSupportFragmentManager(),"DatePicker");
         });
@@ -31,14 +38,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-
+        // material text view
         MaterialTextView txt = findViewById(R.id.txt);
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+        // Formatting the data to print
         String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         txt.setText(date);
     }
